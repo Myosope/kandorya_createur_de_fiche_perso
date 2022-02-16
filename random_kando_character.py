@@ -1,4 +1,4 @@
-﻿###ULTIMATE BRAVERY KANDORYA
+###ULTIMATE BRAVERY KANDORYA
 import random
 import copy
 
@@ -47,8 +47,11 @@ liste_genre = ["Homme","Femme","Autre"]
 liste_immunite=["Coma","Sommeil",  "Silence",   "Douleur", "Nausee",    "Oubli",    "Langue morte","Lenteur",    "Petrification",  "Surdite",    "Verite"]
 nb_competence_max=20 #par defaut
 
-Liste_des_langages=[]#TODO
-liste_competences=[]
+Liste_des_langages=["Commun","Targain","Shin","Mulq","Elfique","Orc","Nain","Abyssi"] #TODO
+
+#############################CREATION DES COMPETENCES
+
+liste_competences=[]#initialisation à vide
 
 
 ##############################Archetypes
@@ -275,95 +278,95 @@ Taper = competence("Taper",0,[[]])
 
 ###################################################
 liste_sort=[]
-#TODO : Liste des sorts
-
+###
 Alarme                     =sort("Alarme",2,[[magicien]])
+Alarme.action = "Au contact"
+Alarme.incantation = "Incantation longue"
+Alarme.composant = "Clochette + ficelle"
+
 liste_sort.append(Alarme)
-
-
+###
 Analyse_de_psyche          =sort("Analyse_de_psyche",3,[[magicien]])
 liste_sort.append(Analyse_de_psyche)
-
+###
 Armure_Magique             =sort("Armure_Magique",3,[[magicien]])
 liste_sort.append(Armure_Magique)
-
-Barriere_magique                     =sort("Barriere_magique",3,[[magicien]])
+###
+Barriere_magique           =sort("Barriere_magique",3,[[magicien]])
 liste_sort.append(Barriere_magique)
-
-Capture_d_ame                     =sort("Capture_d_ame",5,[[magicien]])
+###
+Capture_d_ame              =sort("Capture_d_ame",5,[[magicien]])
 liste_sort.append(Capture_d_ame)
-
-Champ_d_energie                     =sort("Champ_d_energie",3,[[magicien]])
+###
+Champ_d_energie            =sort("Champ_d_energie",3,[[magicien]])
 liste_sort.append(Champ_d_energie)
-
-Desarmement                     =sort("Desarmement",3,[[magicien]])
+###
+Desarmement                =sort("Desarmement",3,[[magicien]])
 liste_sort.append(Desarmement)
-
-Detection_magique                     =sort("Detection_magique",3,[[magicien]])
+###
+Detection_magique          =sort("Detection_magique",3,[[magicien]])
 liste_sort.append(Detection_magique)
-
-Dissipation_de_barriere                     =sort("Dissipation_de_barriere",3,[[magicien]])
+###
+Dissipation_de_barriere    =sort("Dissipation_de_barriere",3,[[magicien]])
 liste_sort.append(Dissipation_de_barriere)
-
-Duplication_de_souvenir                     =sort("Duplication_de_souvenir",6,[[magicien]])
+###
+Duplication_de_souvenir    =sort("Duplication_de_souvenir",6,[[magicien]])
 liste_sort.append(Duplication_de_souvenir)
-
-Entraves                    =sort("Entraves",4,[[magicien]])
+###
+Entraves                   =sort("Entraves",4,[[magicien]])
 liste_sort.append(Entraves)
-
-Faire_Parler_un_Mort                     =sort("Faire_Parler_un_Mort",5,[[magicien]])
+###
+Faire_Parler_un_Mort       =sort("Faire_Parler_un_Mort",5,[[magicien]])
 liste_sort.append(Faire_Parler_un_Mort)
-
+###
 Flammeche=sort("Flammeche",1,[[magicien]])
 liste_sort.append(Flammeche)
-
-Langue_morte                     =sort("Langue_morte",2,[[magicien]])
+###
+Langue_morte               =sort("Langue_morte",2,[[magicien]])
 liste_sort.append(Langue_morte)
-
-Lenteur                     =sort("Lenteur",4,[[magicien]])
+###
+Lenteur                    =sort("Lenteur",4,[[magicien]])
 liste_sort.append(Lenteur)
-
-Localisation                     =sort("Localisation",6,[[magicien]])
+###
+Localisation               =sort("Localisation",6,[[magicien]])
 liste_sort.append(Localisation)
-
-Lumiere                     =sort("Lumiere",1,[[magicien]])
+###
+Lumiere                    =sort("Lumiere",1,[[magicien]])
 liste_sort.append(Lumiere)
-
-
-Nausee               =sort("Nausee",2,[[magicien]])
+###
+Nausee                     =sort("Nausee",2,[[magicien]])
 liste_sort.append(Nausee)
-
-
-Peur      =sort("Peur",5,[[magicien]])
+###
+Peur                       =sort("Peur",5,[[magicien]])
 liste_sort.append(Peur)
-
-Projectile_magique_1                     =sort("Projectile_magique_1",2,[[magicien]])
+###
+Projectile_magique_1       =sort("Projectile_magique_1",2,[[magicien]])
 liste_sort.append(Projectile_magique_1)
-
-Projectile_magique_2                     =sort("Projectile_magique_2",4,[[magicien,Projectile_magique_1]])
+###
+Projectile_magique_2       =sort("Projectile_magique_2",4,[[magicien,Projectile_magique_1]])
 liste_sort.append(Projectile_magique_2)
-
-Projectile_magique_3                     =sort("Projectile_magique_3",6,[[magicien,Projectile_magique_2]])
+###
+Projectile_magique_3       =sort("Projectile_magique_3",6,[[magicien,Projectile_magique_2]])
 liste_sort.append(Projectile_magique_3)
-
-Rafale_de_vent                     =sort("Rafale_de_vent",3,[[magicien]])
+###
+Rafale_de_vent             =sort("Rafale_de_vent",3,[[magicien]])
 liste_sort.append(Rafale_de_vent)
-
-Soin_necromantique                     =sort("Soin_necromantique",3,[[magicien]])
+###
+Soin_necromantique         =sort("Soin_necromantique",3,[[magicien]])
 liste_sort.append(Soin_necromantique)
-
-Sommeil                     =sort("Sommeil",3,[[magicien]])
+###
+Sommeil                    =sort("Sommeil",3,[[magicien]])
 liste_sort.append(Sommeil)
-
-Silence                     =sort("Silence",4,[[magicien]])
+###
+Silence                    =sort("Silence",4,[[magicien]])
 liste_sort.append(Silence)
-
-Surdite                     =sort("Surdite",3,[[magicien]])
+###
+Surdite                    =sort("Surdite",3,[[magicien]])
 liste_sort.append(Surdite)
-
-Transfert_de_vie                     =sort("Transfert_de_vie",6,[[magicien]])
+###
+Transfert_de_vie           =sort("Transfert_de_vie",6,[[magicien]])
 liste_sort.append(Transfert_de_vie)
-
+###
 Verite                     =sort("Verite",6,[[magicien]])
 liste_sort.append(Verite)
 ###
@@ -615,7 +618,7 @@ def ajout_competences(perso,choix):
                     new_competence=competence("new",0,[])
                     new_competence = copy.deepcopy(Lire_Ecrire_Parler)		
                     if new_competence.spec=="Several":
-                        new_competence.spec =  str(input("Specialite de la competence pour " + str(new_competence.name) + "?\n"))
+                        new_competence.spec =  str(input("Entrez une langue pour " + str(new_competence.name) + " parmi les suivantes : \n" + str(Liste_des_langages) + " \n"))
                         spec_deja_acquise = False
                         while spec_deja_acquise == False:
                             #if Mon_personnage.competences !=[]:
@@ -750,6 +753,7 @@ print("Genre:" + str(Mon_personnage.race.name))
 ajout_competences(Mon_personnage,Mon_choix)
 print("ETAT FINAL")
 affiche_personnage(Mon_personnage)
+
 
 
 #Verification qu'il n'y a pas de competence en double:
