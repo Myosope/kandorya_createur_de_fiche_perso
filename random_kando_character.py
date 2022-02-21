@@ -43,7 +43,7 @@ class personnage():
 
 
 
-liste_genre = ["Homme","Femme","Autre"]
+liste_genre = ["HOMME","FEMME","AUTRE"]
 liste_immunite=["Coma","Sommeil",  "Silence",   "Douleur", "Nausee",    "Oubli",    "Langue morte","Lenteur",    "Petrification",  "Surdite",    "Verite"]
 nb_competence_max=20 #par defaut
 
@@ -379,18 +379,15 @@ liste_competences.extend(liste_sort)
 
 
 
-Mon_personnage = personnage()
-Mon_personnage.xp=int(input("Nombre d'XP ? \n"))
-nb_competence_max=int(input("Nombre de competences maximales ?\n"))
 
 
 def ajout_genre(perso, choix):
     if choix == True:
     	genre_choisi = False
     	while genre_choisi not in liste_genre:
-    		genre_choisi = str(input("Veuillez choisir un genre parmi la liste suivante : " + str(liste_genre) +"\n"))
+    		genre_choisi = str(input("Veuillez choisir un genre parmi la liste suivante : " + str(liste_genre) +"\n")).upper()
     		if genre_choisi not in liste_genre:
-    			print("Erreur: veuillez entrer un des genre proposes (respectez la case).")
+    			print("Erreur: veuillez entrer un des genre proposes (respectez la casse).")
     else:
     	genre_choisi = random.choice(["Homme","Femme"])
     perso.genre=genre_choisi
@@ -411,9 +408,9 @@ def ajout_race(perso,choix):
     	while nom_race_choisie not in liste_nom_race:
     		
     		
-    		nom_race_choisie = str(input("Veuillez choisir une race parmi la liste suivante : " + str(liste_nom_race)+"\n" ))
+    		nom_race_choisie = str(input("Veuillez choisir une race parmi la liste suivante (respectez la casse ): " + str(liste_nom_race)+"\n" ))
     		if nom_race_choisie not in liste_nom_race:
-    			print("Erreur: veuillez entrer une des race proposees (respectez la case).")
+    			print("Erreur: veuillez entrer une des race proposees (respectez la casse).")
     	for race in liste_race:
     		if race.name == nom_race_choisie:
     			race_choisie = race
@@ -424,7 +421,7 @@ def ajout_race(perso,choix):
     	race_choisie = random.choice(liste_race)
 
 
-
+    
     langue_raciale=competence("new",0,[])
     langue_raciale=copy.deepcopy(Lire_Ecrire_Parler)
     langue_raciale.spec=str(race_choisie.name)
@@ -439,6 +436,7 @@ def ajout_race(perso,choix):
         elif perso.genre == "Femme":
             perso.competences.append(Malediction_de_l_eau)
         else:
+            print("Les abyssi ni homme ni femme n'ont pas de compétence déterminée.")
             None
 
     elif race_choisie.name== Aratois.name  :
@@ -600,7 +598,7 @@ def ajout_competences(perso,choix):
                    
                     
                     if nom_competence_choisie not in liste_nom_competence:
-                        print("Erreur: veuillez entrer une des competence proposees (respectez la case).")
+                        print("Erreur: veuillez entrer une des competence proposees (respectez la casse).")
         		
                 print( "nom_competence_choisie : " + str(nom_competence_choisie))
                 for comp in liste_competences_dispo:
@@ -707,9 +705,16 @@ def ajout_competences(perso,choix):
             #affiche_personnage(perso)
         affiche_personnage(Mon_personnage)
         print("\n--------\n")
+        
+        continue_input = str(input("Ajouter une nouvelle compétence ? ( 'OUI' ou 'NON') \n")).upper()
+        if continue_input == "OUI" or continue_input == "O":
+            return()
+        
         if (perso.xp==0):
             #print("Plus d'xp a depenser")
-            break
+            return()
+
+
 
 
 def affiche_personnage(perso):
@@ -736,27 +741,68 @@ def verification(perso):
     return verif
 
 
-#### CHOIX D'UNE GENERATION ALEATOIRE OU NON
-Mon_choix = str(input("Voulez vous faire votre personnage vous-meme ? (OUI ou NON)\n"))
-if Mon_choix == "OUI":
-    Mon_choix = True
-else:
-    Mon_choix =False
+
+def creation():
+
+    Mon_personnage = personnage()
+    Mon_personnage.xp=int(input("Nombre d'XP ? \n"))
+    nb_competence_max=int(input("Nombre de competences maximales ?\n"))
+
+    #### CHOIX D'UNE GENERATION ALEATOIRE OU NON
+    Mon_choix = str(input("Voulez vous faire votre personnage vous-meme ? (Entrer 'OUI' ou 'NON')\n")).upper()
+
+    if Mon_choix == "OUI" or Mon_choix == "O":
+        Mon_choix = True
+    elif Mon_choix =="NON" or Mon_choix == "N":
+        Mon_choix = False
+    else:
+        Mon_choix = True
 
 
-ajout_genre(Mon_personnage,Mon_choix)
-print("Genre:" + str(Mon_personnage.genre))
+    ajout_genre(Mon_personnage,Mon_choix)
+    print("Genre:" + str(Mon_personnage.genre))
 
-ajout_race(Mon_personnage,Mon_choix)
-print("Genre:" + str(Mon_personnage.race.name))
+    ajout_race(Mon_personnage,Mon_choix)
+    print("Genre:" + str(Mon_personnage.race.name))
 
-ajout_competences(Mon_personnage,Mon_choix)
-print("ETAT FINAL")
-affiche_personnage(Mon_personnage)
+    ajout_competences(Mon_personnage,Mon_choix)
+    print("ETAT FINAL")
+    affiche_personnage(Mon_personnage)
+    
+    #Verification qu'il n'y a pas de competence en double:
+    print("Verif :" +str(verification(Mon_personnage) ))
+    print ("FIN création")
+
+    return(Mon_personnage)
+
+creation()
+
+ 
+# Mon_personnage = personnage()
+# Mon_personnage.xp=int(input("Nombre d'XP ? \n"))
+# nb_competence_max=int(input("Nombre de competences maximales ?\n"))
+
+### CHOIX D'UNE GENERATION ALEATOIRE OU NON
+# Mon_choix = str(input("Voulez vous faire votre personnage vous-meme ? (OUI ou NON)\n"))
+# if Mon_choix == "OUI":
+    # Mon_choix = True
+# else:
+    # Mon_choix =False
+
+
+# ajout_genre(Mon_personnage,Mon_choix)
+# print("Genre:" + str(Mon_personnage.genre))
+
+# ajout_race(Mon_personnage,Mon_choix)
+# print("Genre:" + str(Mon_personnage.race.name))
+
+# ajout_competences(Mon_personnage,Mon_choix)
+# print("ETAT FINAL")
+# affiche_personnage(Mon_personnage)
 
 
 
 #Verification qu'il n'y a pas de competence en double:
-print("Verif :" +str(verification(Mon_personnage) ))
-print ("FIN")
+# print("Verif :" +str(verification(Mon_personnage) ))
+# print ("FIN")
 
