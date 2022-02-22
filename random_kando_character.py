@@ -35,7 +35,8 @@ class personnage():
         self.xp=10
         self.name="Jean-Michel"
         self.competences=[]
-        self.PV=2 #ne peut jamais depasser 5
+        self.PV = 2 #ne peut jamais depasser 5
+        self.PV_etat = 2 
         self.Pugilat_score=0
         self.race="Null"
         self.genre="Null"
@@ -620,7 +621,7 @@ def ajout_competences(perso,choix):
                         spec_deja_acquise = False
                         while spec_deja_acquise == False:
                             #if Mon_personnage.competences !=[]:
-                            for comp in Mon_personnage.competences:
+                            for comp in perso.competences:
                                 if str(comp.spec) == str(new_competence.spec) and comp.spec!="Null":
                                     #cette specificite de competence a deja ete choisie
                                     new_competence.spec=str(input("Cette specialite a deja ete choisie.\nVeuillez en choisir une autre specialite de la competence du type " + new_competence.name +" : \n"))
@@ -668,7 +669,7 @@ def ajout_competences(perso,choix):
                 spec_deja_acquise = False
                 while spec_deja_acquise == False:
                     #if Mon_personnage.competences !=[]:
-                    for comp in Mon_personnage.competences:
+                    for comp in perso.competences:
                         if str(comp.spec) == str(new_competence.spec) and comp.spec!="Null":
                             #cette specificite de competence a deja ete choisie
                             new_competence.spec=str(input("Cette specialite a deja ete choisie.\n Veuillez en choisir une autre competence du type " + competence_choisie.name +" : \n"))
@@ -703,11 +704,11 @@ def ajout_competences(perso,choix):
 
             #print("Etat" + str(i))
             #affiche_personnage(perso)
-        affiche_personnage(Mon_personnage)
+        affiche_personnage(perso)
         print("\n--------\n")
         
         continue_input = str(input("Ajouter une nouvelle compétence ? ( 'OUI' ou 'NON') \n")).upper()
-        if continue_input == "OUI" or continue_input == "O":
+        if continue_input == "NON" or continue_input == "N":
             return()
         
         if (perso.xp==0):
@@ -715,7 +716,62 @@ def ajout_competences(perso,choix):
             return()
 
 
+def taverne(perso): #TODO
+    perso.PV_etat = perso.PV
 
+    print("Vous entrez dans la taverne de Myosope.")
+    print("'Bienvenue !' s'exclame le tavernier. 'Prenez place ! Alors qu'est-ce que je vous sert ?' ").upper()
+    
+    boisson = str(input("'Voulez vous une biere ?' (OUI / NON)"))
+    if boisson == "OUI":
+        None
+    elif boisson == "KRAKATO":
+        print("'Je vois que Monsieur est connaisseur. Tenez mon brave !'")
+        print("Vous buvez la décoction du Minotaure. Seul les braves ou les fous tentent l'expérience.")
+        print("Pendant la beuverie qui s'en suit, vous faite la rencontre du minotaure Kasrock. Il vous pose la question suivante :")
+        print("'TOURIST ?'")
+        print("Que répondez-vous ?")
+        dur_reveil()
+    else:
+        boisson = str(input("'Voulez vous du rhum pirate aux bigorneaux ?' (OUI / NON)")).upper()
+        if boisson == "OUI":
+            None
+        else :
+            boisson = str(input("'Peut-être voulez-vous de l'eau ?' (OUI / NON)")).upper()
+            if boisson == "OUI":
+                None
+            if boisson == "OUI":
+                None
+                
+                
+                
+def dur_reveil():#TODO
+    print("Vous vous reveillez avec un gros mal de crane. 'Mais que s'est-il passé ?' songez-vous.")
+    print("Votre main touche un pelage duveteux, une chevre dort à vos côté. .")
+    
+    
+    camp = random.randrange(1,8,1)
+    if camp == 1:
+        None
+    elif camp == 2:
+        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+    elif camp == 3:
+        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+    elif camp == 4:
+        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+    elif camp == 5:
+        None
+    elif camp == 6:
+        None
+    elif camp == 7:
+        None
+    else :
+        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+
+def camp_primo():
+    print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+    print("Vous feriez mieux de fuir avant que quelqu'un ne vous repère.")
+        
 
 def affiche_personnage(perso):
     print("Nom: " +perso.name)
@@ -750,11 +806,11 @@ def creation():
 
     #### CHOIX D'UNE GENERATION ALEATOIRE OU NON
     Mon_choix = str(input("Voulez vous faire votre personnage vous-meme ? (Entrer 'OUI' ou 'NON')\n")).upper()
-
+    
     if Mon_choix == "OUI" or Mon_choix == "O":
         Mon_choix = True
     elif Mon_choix =="NON" or Mon_choix == "N":
-        Mon_choix = False
+        Mon_choix = False        
     else:
         Mon_choix = True
 
@@ -772,10 +828,15 @@ def creation():
     #Verification qu'il n'y a pas de competence en double:
     print("Verif :" +str(verification(Mon_personnage) ))
     print ("FIN création")
-
+    
+    
     return(Mon_personnage)
 
-creation()
+perso_cree = creation()
+appui = str(input("appuyez sur entree pour finir le programme \n"))
+    
+if appui == "ALLER A LA TAVERNE":
+    taverne(perso_cree)
 
  
 # Mon_personnage = personnage()
