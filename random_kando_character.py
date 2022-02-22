@@ -1,7 +1,7 @@
 ###ULTIMATE BRAVERY KANDORYA
 import random
 import copy
-
+import time
 print("BIENVENUE SUR ULTIMATE BRAVERY KANDORYA")
 #Ici les archetypes et competences sont traitees de la meme facon
 
@@ -41,9 +41,13 @@ class personnage():
         self.race="Null"
         self.genre="Null"
         self.description="Write description here"
-
-
-
+    
+    def has_competence(comp):
+        for perso_comp in self.competences:
+            if comp.name.upper() == perso_comp.name.upper() and comp.spec.upper() == perso_comp.spec.upper():
+                return(True)
+        return(False)
+    
 liste_genre = ["HOMME","FEMME","AUTRE"]
 liste_immunite=["Coma","Sommeil",  "Silence",   "Douleur", "Nausee",    "Oubli",    "Langue morte","Lenteur",    "Petrification",  "Surdite",    "Verite"]
 nb_competence_max=20 #par defaut
@@ -716,62 +720,199 @@ def ajout_competences(perso,choix):
             return()
 
 
+
+
+
 def taverne(perso): #TODO
-    perso.PV_etat = perso.PV
+    
 
     print("Vous entrez dans la taverne de Myosope.")
-    print("'Bienvenue !' s'exclame le tavernier. 'Prenez place ! Alors qu'est-ce que je vous sert ?' ").upper()
-    
-    boisson = str(input("'Voulez vous une biere ?' (OUI / NON)"))
-    if boisson == "OUI":
-        None
-    elif boisson == "KRAKATO":
-        print("'Je vois que Monsieur est connaisseur. Tenez mon brave !'")
-        print("Vous buvez la décoction du Minotaure. Seul les braves ou les fous tentent l'expérience.")
-        print("Pendant la beuverie qui s'en suit, vous faite la rencontre du minotaure Kasrock. Il vous pose la question suivante :")
-        print("'TOURIST ?'")
-        print("Que répondez-vous ?")
-        dur_reveil()
-    else:
-        boisson = str(input("'Voulez vous du rhum pirate aux bigorneaux ?' (OUI / NON)")).upper()
+    time.sleep(0.5)
+    print("'Bienvenue !' s'exclame le tavernier. 'Prenez place ! Alors qu'est-ce que je vous sert ?' \n")
+    while(1):
+        boisson = str(input("'Voulez vous une biere ?' (OUI / NON)\n")).upper()
         if boisson == "OUI":
-            None
-        else :
-            boisson = str(input("'Peut-être voulez-vous de l'eau ?' (OUI / NON)")).upper()
-            if boisson == "OUI":
-                None
-            if boisson == "OUI":
-                None
-                
+            print("Vous buvez toute la nuit !")
+            dur_reveil()
+            return()
+        elif boisson == "KRAKATO":
+            time.sleep(0.5)
+            print("'Je vois que Monsieur est connaisseur. Tenez mon brave !'")
+            time.sleep(0.5)
+            print("Vous buvez la décoction du Minotaure. Seul les braves ou les fous tentent l'expérience.")
+            time.sleep(0.5)
+            print("Pendant la beuverie qui s'en suit, vous faite la rencontre du minotaure Kasrock. Il vous pose la question suivante :")
+            time.sleep(0.5)
+            print("'TOURIST ?'")
+            reponse = str(input("Que répondez-vous ?\n")).upper
+            if reponse == "TOURIST":
+                print("Le minotaure leve sa hache sans crier gare !")
+                time.sleep(0.5)
+                if perso.has_competence(Esquive):
+                    print("Grace à votre vivacite vous esquivez le coup. Mais vous devez malheureusement prendre la fuite, desarme comme vous êtes...")
+                else :
+                    perso.PV_etat = perso.PV_etat -2
+                    if perso.PV_etat == 0 :
+                        print("Le minotaure vous assene un enorme coup de hache. Vous perdez la vie... ")
+                        time.sleep(0.5)
+                        print("GAME OVER")
+                        return()
+                    else:
+                        None
+                print("Par les dieux vous êtes encore vivant ! Vous vous enfuyez de ce lieu de fous...")  
+                time.sleep(0.5)
+                print("Cependant comme le troll de la chanson vous trébuchez sur la route mal pavée. Vous vous évanouissez.")  
+                time.sleep(0.5)
+            dur_reveil()
+            return()
+        elif boisson == "NON":
+            while(1):
+                boisson = str(input("'Voulez vous du rhum pirate aux bigorneaux ?' (OUI / NON)\n")).upper()
+                if boisson == "OUI":
+                    print("La boisson tape dur sur votre système.")
+                    time.sleep(0.5)
+                    print("Après quelques blagues idiotes échangées et plusieurs godets, vous repartez avec des pirates qui sont aussi avinés que vous.")
+                    time.sleep(0.5)
+                    print("Sur le chemin, vous croisez Airain.")
+                    time.sleep(0.5)
+                    print("Ivre comme vous êtes, vous lui criez qu'il est toujours rouge de colère.")
+                    time.sleep(0.5)
+                    print("Le dragon s'énerve et crache des flammes. Vous rotez sur l'incendie et causez une immense explosion.")
+                    time.sleep(0.5)
+                    print("GAME OVER")
+                    
+                elif boisson == "NON":
+                    while(1):
+                        boisson = str(input("'Peut-être voulez-vous de l'eau ?' (OUI / NON)\n")).upper()
+                        if boisson == "OUI":
+                            print("Vous vous hydratez bien. C")
+                        elif boisson == "NON":
+                            phrase = 1
+                            while(boisson == "NON"):
+                                
+                                
+                                if phrase ==1:
+                                    boisson = input(str("'Vous dîtes oui des fois ?'\n")).upper()
+                                    time.sleep(0.5)
+                                elif phrase ==2:
+                                    boisson = input(str("'Vous vous foutez pas un peu de moi des fois ?'\n")).upper()
+                                    time.sleep(0.5)
+                                elif phrase ==3:
+                                    boisson = input(str("'Si tu veux jouer à l'imbécile t'es pas sûr de gagner.'\n")).upper()
+                                    time.sleep(0.5)
+                                elif phrase ==4:
+                                    boisson = input(str("'Vous vous fatiguez jamais ?'\n")).upper()
+                                    time.sleep(0.5)
+                                elif phrase ==5:
+                                    boisson = input(str("'Bon allez sortez de ma taverne !'\n")).upper()
+                                    time.sleep(0.5)
+                                elif phrase ==6:
+                                    boisson = input(str("'Comment ça non ? Tu veux que je te sorte moi-même ?'\n")).upper()
+                                    time.sleep(0.5)
+                                else:
+                                    print("'Allez ! Sort et vas t'amuser dans la plaine !'")
+                                    time.sleep(0.5)
+                                    print("Fin de l'aventure, vous avez survécu, mais c'était pas très trépidant.")
+                                    time.sleep(0.5)
+                                    return()
+                                phrase = phrase +1
+                            
+                        else :
+                            print("'Bon décidez-vous ! C'est OUI ou NON ?'")
+                            time.sleep(0.5)
+                else :
+                    print("'Bon décidez-vous ! C'est OUI ou NON ?'")
+                    time.sleep(0.5)
+        else:
+            print("'Bon décidez-vous ! C'est OUI ou NON ?'")
+            time.sleep(0.5)
                 
                 
 def dur_reveil():#TODO
     print("Vous vous reveillez avec un gros mal de crane. 'Mais que s'est-il passé ?' songez-vous.")
-    print("Votre main touche un pelage duveteux, une chevre dort à vos côté. .")
-    
-    
+    time.sleep(0.5)
+    print("Votre main touche un pelage duveteux, une chèvre dort à vos côté. .")
+    time.sleep(0.5)
     camp = random.randrange(1,8,1)
     if camp == 1:
-        None
+        camp_primo(perso)
+        return()
     elif camp == 2:
-        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+        print("En observant les alentours, vous êtes dans la section encore en développement du jeu. Un orga vous repère et vous fais reroll.")#TODO
+        return()
     elif camp == 3:
-        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+        print("En observant les alentours, vous êtes dans la section encore en développement du jeu. Un orga vous repère et vous fais reroll.")#TODO
+        return()
     elif camp == 4:
-        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+        print("En observant les alentours, vous êtes dans la section encore en développement du jeu. Un orga vous repère et vous fais reroll.")#TODO
+        return()
     elif camp == 5:
-        None
+        print("En observant les alentours, vous êtes dans la section encore en développement du jeu. Un orga vous repère et vous fais reroll.")#TODO
+        return()
     elif camp == 6:
-        None
+        print("En observant les alentours, vous êtes dans la section encore en développement du jeu. Un orga vous repère et vous fais reroll.")#TODO
+        return()
     elif camp == 7:
-        None
+        print("En observant les alentours, vous êtes dans la section encore en développement du jeu. Un orga vous repère et vous fais reroll.")#TODO
+        return()
     else :
-        print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+        print("En observant les alentours, vous êtes dans la section encore en développement du jeu. Un orga vous repère et vous fais reroll.")#TODO
+        return()
 
-def camp_primo():
+def camp_primo(perso):
     print("En observant les alentours, vous voyez que vous êtes au milieu du camp des primos, et que l'idole est renversée.")
+    time.sleep(0.5)
     print("Vous feriez mieux de fuir avant que quelqu'un ne vous repère.")
+    time.sleep(0.5)
+    print("Soudain un ogre de 4 mètres de haut vous barre la route !")
+    time.sleep(0.5)
+    print("'Hé ! T KI ?' s'exclame-t-il dans un commun approximatif.")
+    choix =str(input("Voulez vous le combattre à main nu ?")).upper()
+    if choix == "OUI":
+        if perso.Pugilat_score > 6:
+            print("Vous étalez l'ogre d'une droite bien placée et vous vous enfuyez.")
+            print("Fin du jeu")
+            return()
+        else:
+            print ("Vous tentez d'attaquer l'ogre mais celui-ci vous envoi valdinguer deux mètres plus loin. Il vous saisit inconscient et vous plonge dans sa marmite")
+            print("GAME OVER")
+            return
+    else:
+        choix =str(input("Ou bien lancer un sort ? (OUI/NON)")).upper()
+        if choix =="OUI":
+            if perso.has_competence(Projectile_magique_1):
+                print("Vous lancez un projectile magique sur l'ogre. Et réussissez à vous enfuire.")
+                time.sleep(0.5)
+                print("'Ouf ! Quel nuit.' songez-vous.")
+                time.sleep(0.5)
+                print("Fin du jeu")
+                return()
+            elif perso.has_competence(Sommeil):
+                print("Vous lancez un projectile magique sur l'ogre. Et réussissez à vous enfuire.")
+                time.sleep(0.5)
+                print("'Ouf ! Quel nuit.' songez-vous.")
+                time.sleep(0.5)
+                print("Fin du jeu")
+            else:
+                choix =str(input("Tentez de vous expliquer ? (OUI/NON)\n")).upper()
+                langue_ogre= competence("",0,[[]])
+                langue_ogre = copy.deepcopy(Lire_Ecrire_Parler)
+                langue_ogre.spec=("Ogre")
+                if perso.has_competence(langue_ogre):
+                    print("Vous arrivez à faire comprendre à l'ogre que vous êtes un ami dans sa langue. Il vous laisse partir.")
+                    time.sleep(0.5)
+                    print("Fin du jeu")
+                    return()
+                else:
+                    
+                    print("Vos explications confuses n'ont pas l'air de convaincre l'ogre. D'ailleurs il n'a pas l'air de vous comprendre du tout.")
+                    time.sleep(0.5)
+                    print("Il vous assomme par surprise et vous finissez dans sa marmite.")
+                    time.sleep(0.5)
+                    print("GAME OVER")
+                    return()
         
+
 
 def affiche_personnage(perso):
     print("Nom: " +perso.name)
@@ -833,8 +974,8 @@ def creation():
     return(Mon_personnage)
 
 perso_cree = creation()
-appui = str(input("appuyez sur entree pour finir le programme \n"))
-    
+appui = str(input("appuyez sur entree pour finir le programme \n")).upper()
+perso_cree.PV_etat = perso_cree.PV   
 if appui == "ALLER A LA TAVERNE":
     taverne(perso_cree)
 
